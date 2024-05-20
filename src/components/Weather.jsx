@@ -27,6 +27,15 @@ function Weather() {
     fetchWeatherData(search);
   }
 
+  function getCurrentDate() {
+    return new Date().toLocaleDateString('en-us', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  }
+
   useEffect(() => {
     fetchWeatherData('dhaka');
   }, []);
@@ -40,6 +49,42 @@ function Weather() {
         setSearch={setSearch}
         handleSearch={handleSearch}
       />
+
+      {loading ? (
+        <h2>Loading data, please wait....</h2>
+      ) : (
+        <div>
+          <div className=''>
+            <h2>
+              {' '}
+              {weatherData?.name}, <span> {weatherData?.sys?.country} </span>{' '}
+            </h2>
+          </div>
+          <div className=''>
+            <span> {getCurrentDate()} </span>
+          </div>
+          <div className=''>{weatherData?.main?.temp}</div>
+          <p className=''>
+            {weatherData && weatherData.weather && weatherData.weather[0]
+              ? weatherData.weather[0].description
+              : ''}
+          </p>
+          <div className=''>
+            <div>
+              <div>
+                <p className=''>{weatherData?.wind?.speed}</p>
+                <p>Wind Speed</p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <p className=''>{weatherData?.main?.humidity}%</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
