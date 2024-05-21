@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 function Search({ search, setSearch, handleSearch }) {
   return (
     <div className=' w-full flex justify-around items-center mb-8 mt-3 '>
